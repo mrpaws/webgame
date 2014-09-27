@@ -1,0 +1,32 @@
+{
+  "name": "webgame",
+  "version": "0.0.0",
+  "homepage": "https://github.com/mrpaws/webgame",
+  "authors": [
+    "paws <paws@delimitize.com>"
+  ],
+  "description": "attempt at building webgame with threejs",
+  "main": "js/webgame.js",
+  "moduleType": [
+    "globals"
+  ],
+  "keywords": [
+    "webgame",
+    "three.js",
+    "html5",
+    "gulp",
+    "bower",
+    "node",
+    "npm",
+    "web",
+    "webapp"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
