@@ -11,7 +11,6 @@ var uglify = require('gulp-uglify');
 var concat = require('gulp-concat');
 var jshint = require('gulp-jshint');
 var rename = require('gulp-rename');
-var merge = require('merge-stream');
 var connect = require('gulp-connect');
 var bower = require('main-bower-files');
 
