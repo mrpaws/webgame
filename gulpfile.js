@@ -2,77 +2,68 @@
   webgame - three.js project gulp boilerplate
     MrPaws 2014
 
-  TODO: 1) image processing boilerplate 2) always use minified bower deps (link)
+    livereload, reloads
+
+    TODO: 1) image processing boilerplate 
+          2) always use minified bower deps (link)
 */
 var gulp = require('gulp');
-
-var del = require('del');
-var uglify = require('gulp-uglify');
-var concat = require('gulp-concat');
-var jshint = require('gulp-jshint');
-var rename = require('gulp-rename');
-var connect = require('gulp-connect');
-var bower = require('main-bower-files');
-
-var htmlSrc = '*.html';
-var jsSrc = 'js/**/*.js';
-var cssSrc = 'css/**/*.css';
-var assetsSrc = 'assets/**';
+var $ = require('gulp-load-plugins')();
 var buildDir = 'dist';
 
-gulp.task('clean', function(cb) {
-  return del([buildDir], cb);
-});
+gulp.task('clean', require('del').bind(null, ['dist']));
 
 gulp.task('html',function () {
-  return gulp.src(htmlSrc)
+  return gulp.src('app/*.html')
     .pipe(gulp.dest(buildDir))
-    .pipe(connect.reload());
+    .pipe($.connect.reload());
 });
 
 gulp.task('js', function () {
-  return gulp.src(jsSrc)
-    .pipe(concat('project.js'))
-  	.pipe(uglify())
-  	.pipe(rename('project.min.js'))
+  return gulp.src('app/js/**/*.js')
+    .pipe($.concat('project.js'))
+  	.pipe($.uglify())
+  	.pipe($.rename('project.min.js'))
     .pipe(gulp.dest(buildDir + '/js'));
 });
 
 gulp.task('link', ['js'], function () { 
-  var jsFiles = bower();
+  var jsFiles = require('main-bower-files')();
   jsFiles.push(buildDir + '/js/project.min.js');
   return gulp.src(jsFiles)
-  	.pipe(concat('all.js'))
-  	.pipe(rename('all.min.js'))
+  	.pipe($.concat('all.min.js'))
     .pipe(gulp.dest(buildDir + '/js'))
-    .pipe(connect.reload());
+    .pipe($.connect.reload());
 })
 
 gulp.task('css', function () {
-  return gulp.src(cssSrc)
+  return gulp.src('app/css/**/*.css')
   	.pipe(gulp.dest(buildDir + '/css'))
-    .pipe(connect.reload());
+    .pipe($.connect.reload());
 });
 
 gulp.task('assets', function () {
-  return gulp.src(assetsSrc)
+  return gulp.src('app/assets/**')
   	.pipe(gulp.dest(buildDir + '/assets'))
-    .pipe(connect.reload());
+    .pipe($.connect.reload());
 });
 
 gulp.task('connect', function() {
-  connect.server({
+  $.connect.server({
     root: buildDir,
     livereload: true
   });
+  require('opn')('http://localhost:8080');
 });
 
-gulp.task('watch', function () {
-  gulp.watch([htmlSrc], ['html']);
-  gulp.watch([jsSrc], ['js','link']);
-  gulp.watch([cssSrc], ['css']);
-  gulp.watch([assetsSrc], ['assets']);
+gulp.task('watch', ['connect'], function () {
+  gulp.watch(['app/*.html'], ['html']);
+  gulp.watch(['app/js/**/*.js'], ['js','link']);
+  gulp.watch(['app/css/**/*.css'], ['css']);
+  gulp.watch(['app/assets/**'], ['assets']);
   gulp.watch(['bower.json'], ['link']);
 });
 
-gulp.task('default', ['clean','html','js','link','css','assets','connect','watch']);
+gulp.task('build', ['html','js','link','css','assets']);
+
+gulp.task('default', ['build'])
