@@ -2,10 +2,15 @@
   webgame - three.js project gulp boilerplate
     MrPaws 2014
 
-    livereload, reloads
+    Support:
+    livereload, bower integration, minification and concatenation.
+    serves from the build directory but watches on source and 
+    runs build tasks on the fly for production view.
 
     TODO: 1) image processing boilerplate 
           2) always use minified bower deps (link)
+          3) Consider adjust live reload as build
+             tasks per save scale with project deps
 */
 var gulp = require('gulp');
 var $ = require('gulp-load-plugins')();
