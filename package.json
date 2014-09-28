@@ -1,0 +1,35 @@
+{
+  "name": "webgame",
+  "version": "0.0.1",
+  "description": "webgame attempt using threejs",
+  "main": "js/main.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mrpaws/webgame.git"
+  },
+  "keywords": [
+    "webgame",
+    "html5",
+    "threejs"
+  ],
+  "author": "mrpaws",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mrpaws/webgame/issues"
+  },
+  "homepage": "https://github.com/mrpaws/webgame",
+  "devDependencies": {
+    "del": "^0.1.3",
+    "gulp": "^3.8.8",
+    "gulp-concat": "^2.4.1",
+    "gulp-connect": "^2.0.6",
+    "gulp-jshint": "^1.8.5",
+    "gulp-livereload": "^2.1.1",
+    "gulp-rename": "^1.2.0",
+    "gulp-uglify": "^1.0.1",
+    "main-bower-files": "^2.0.0"
+  }
+}

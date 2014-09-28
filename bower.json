@@ -1,6 +1,6 @@
 {
   "name": "webgame",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "homepage": "https://github.com/mrpaws/webgame",
   "authors": [
     "paws <paws@delimitize.com>"
@@ -28,5 +28,8 @@
     "bower_components",
     "test",
     "tests"
-  ]
+  ],
+  "dependencies": {
+    "threejs": "*"
+  }
 }
