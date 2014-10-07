@@ -16,14 +16,17 @@ var gulp = require('gulp');
 var $ = require('gulp-load-plugins')();
 var buildDir = 'dist';
 
+/* clean build directory */
 gulp.task('clean', require('del').bind(null, ['dist']));
 
+/* process html */
 gulp.task('html',function () {
   return gulp.src('app/*.html')
     .pipe(gulp.dest(buildDir))
     .pipe($.connect.reload());
 });
 
+/* process js */
 gulp.task('js', function () {
   return gulp.src('app/js/**/*.js')
     .pipe($.concat('project.js'))
@@ -32,6 +35,7 @@ gulp.task('js', function () {
     .pipe(gulp.dest(buildDir + '/js'));
 });
 
+/* link bower js dependencies */
 gulp.task('link', ['js'], function () { 
   var jsFiles = require('main-bower-files')();
   jsFiles.push(buildDir + '/js/project.min.js');
@@ -41,18 +45,21 @@ gulp.task('link', ['js'], function () {
     .pipe($.connect.reload());
 })
 
+/* process css */
 gulp.task('css', function () {
   return gulp.src('app/css/**/*.css')
   	.pipe(gulp.dest(buildDir + '/css'))
     .pipe($.connect.reload());
 });
 
+/* process assets */
 gulp.task('assets', function () {
   return gulp.src('app/assets/**')
   	.pipe(gulp.dest(buildDir + '/assets'))
     .pipe($.connect.reload());
 });
 
+/* serve content from distribution dir */
 gulp.task('connect', function() {
   $.connect.server({
     root: buildDir,
@@ -61,6 +68,7 @@ gulp.task('connect', function() {
   require('opn')('http://localhost:8080');
 });
 
+/* watch for changes and process */
 gulp.task('watch', ['connect'], function () {
   gulp.watch(['app/*.html'], ['html']);
   gulp.watch(['app/js/**/*.js'], ['js','link']);
@@ -69,6 +77,8 @@ gulp.task('watch', ['connect'], function () {
   gulp.watch(['bower.json'], ['link']);
 });
 
+/* build all */
 gulp.task('build', ['html','js','link','css','assets']);
 
+/* default is to build */
 gulp.task('default', ['build'])

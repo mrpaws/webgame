@@ -22,6 +22,8 @@
   },
   "homepage": "https://github.com/mrpaws/webgame",
   "devDependencies": {
+    "bower": "^1.3.12",
+    "bower-requirejs": "^1.1.2",
     "del": "^0.1.3",
     "gulp": "^3.8.8",
     "gulp-concat": "^2.4.1",
